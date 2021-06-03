@@ -1,0 +1,47 @@
+{% extends 'notetake/base.html' %}
+
+{% load humanize %}
+{% block content %}
+    <div class="note">
+        <div class="page-header">
+            <a href="{% url 'logout' %}" class="top-menu"><span class="glyphicon glyphicon-log-out"></span></a>
+            <a href="{% url 'categories_list' %}" class="top-menu"><span class="glyphicon glyphicon-home"></span></a>
+            <h2>{{ user.username }}</h2>
+        </div>
+        <div class="card3">
+            {% if user.is_superuser %}
+                <a class="btn btn-default" href="{% url 'category_edit' pk=category.pk %}"><span class="glyphicon glyphicon-pencil">Edit Category</span></a>
+                <a class="btn btn-default" href="{% url 'category_delete' pk=category.pk %}"><span class="glyphicon glyphicon-trash">Delete Category</span></a>
+            {% endif %}
+            <h2>{{ category.title }}</h2>
+            <div class="date">
+                <p>Created: {{ category.created_on|naturaltime }}, Updated: {{ category.updated_on|naturaltime|linebreaksbr }}</p>
+            </div>
+            <hr>
+            <div class="card5">
+                <h3> All Products
+                    <a class="btn btn-default" href="{% url 'product_new' %}">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </h3>
+                {% for product in products %}
+                    <div class="note">
+                        <h4>
+                            <a>{{ product.title }}</a>        
+                            <a class="btn btn-default" href="{% url 'product_edit' pk=product.pk %}"><span class="glyphicon glyphicon-pencil"></span>
+                            </a>       
+                            <a class="btn btn-default" href="{% url 'product_delete' id=category.pk pk=product.pk %}">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </h4>
+                        <div class="date">
+                            <p>Created: {{ product.created_on|naturaltime }}, 
+                            Updated: {{ product.updated_on|naturaltime|linebreaksbr }}</p>
+                            <p>Created By: {{ product.user.username }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

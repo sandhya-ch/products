@@ -1,0 +1,27 @@
+{% extends 'notetake/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="page-header">
+		<h2>Sign Up</h2>
+	</div>
+	<div class="card1 border-info" style="width:700px">
+	<form method="post" action="{% url 'register' %}">{% csrf_token %}
+		
+		{% if form.errors %}
+    		<p>There are errors in the form!</p>
+    	{% endif %}
+    	
+    	{{ form|crispy }}
+
+    	<button type="submit" class="btn btn-primary">Sign up</button>
+    </form>
+	</div>
+{% endblock %}
+
+
+
+
+
+
+
+

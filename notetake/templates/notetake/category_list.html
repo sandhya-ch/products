@@ -1,0 +1,25 @@
+{% extends 'notetake/base.html' %}
+{% load humanize %}
+{% block content %}
+<div class="page-header">
+		<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-log-out"></span></a>
+		{% if user.is_superuser %}
+        <a href="{% url 'category_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+		{% endif %}
+        <h1><a href="/">{{ user.username }}</a></h1>
+</div>
+<div class="card4">
+	{% for category in categories %}
+		<div class="note">
+			<h2><a href="{% url 'category_detail' pk=category.pk %}">{{ category.title }}</a></h2>
+			<div class="date">
+			<p>Created: {{ category.created_on|naturaltime }}, 
+			Updated: {{ category.updated_on|naturaltime|linebreaksbr }}</p>
+			<p>Created By: {{ category.user.username }}</p>
+		</div>
+			</div>
+			<hr>
+	{% endfor %}
+</div>	
+{% endblock %}	
+	

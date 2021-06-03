@@ -1,0 +1,6 @@
+1. category.... only super user creation, deletion, updation --- done
+2. normal user will able to saw the list --- done
+
+3. create product and create form, list,id,update, delete views
+4. design UI
+5. send mail while creation

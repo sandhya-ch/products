@@ -1,0 +1,21 @@
+{% extends 'notetake/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if form.errors %}
+    <p>There is something wrong with what you entered!</p>
+    {% endif %}
+    <div class="page-header">
+		<h2>Sign In</h2>
+	</div>
+
+    <div class="card2 border-info" style="width:500px">
+    <form method="post" action="{% url 'login' %}">{% csrf_token %}
+       {{form.username|as_crispy_field }}
+       {{ form.password|as_crispy_field }}
+       
+       <button type="submit" class="btn btn-primary">Sign in</button> 
+       <input type="hidden" name="next" value="{{ next }}">
+       <a href="{% url 'register' %}">register</a>
+    </form>
+	</div>
+{% endblock %}
